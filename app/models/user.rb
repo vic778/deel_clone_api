@@ -1,18 +1,19 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  validates :username, uniqueness: { case_sensitive: false }, presence: true, allow_blank: false,
+                       format: { with: /\A[a-zA-Z0-9]+\z/ }
+  validates :email, uniqueness: { case_sensitive: false }, presence: true
+  validates :password_confirmation, presence: true, on: :create
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable
 
-  
   after_initialize :set_default_role
   belongs_to :role
+  has_one :profile
 
-  validates :first_name, presence: true
-  validates :last_name, presence: true
-  validates :password_confirmation, presence: true, on: :create
-
-  mount_uploader :profile_picture, ProfilePictureUploader
+  def requires_confirmation?
+    !confirmed?
+  end
 
   def update_role(role_name)
     self.role = Role.find_or_create_by(name: role_name)
@@ -20,7 +21,7 @@ class User < ApplicationRecord
   end
 
   def generate_jwt
-    JWT.encode({ id:, exp: 2.days.from_now.to_i }, 'vicSecret')
+    JWT.encode({ id: id, exp: 2.days.from_now.to_i }, 'vicSecret')
   end
 
   private
