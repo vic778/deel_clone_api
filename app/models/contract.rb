@@ -1,5 +1,6 @@
 class Contract < ApplicationRecord
   belongs_to :user
+  has_one :contract_detail
 
   enum name: {
     fixedRate: 0,
