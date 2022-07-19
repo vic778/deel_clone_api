@@ -55,6 +55,8 @@ gem "bootsnap", require: false
 gem "sassc-rails"
 
 gem 'cloudinary'
+gem 'country_select', require: 'country_select_without_sort_alphabetical'
+gem 'dotenv-rails', '~> 2.7', '>= 2.7.6'
 gem "image_processing", "~> 1.2"
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
@@ -75,10 +77,10 @@ group :development do
   gem "web-console"
 
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
-  # gem "rack-mini-profiler"
+  gem "rack-mini-profiler"
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
-  # gem "spring"
+  gem "spring"
 end
 
 group :test do
