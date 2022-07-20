@@ -389,6 +389,7 @@ GEM
     strscan (3.0.3)
     thor (1.2.1)
     tilt (2.0.10)
+    timeliness (0.4.4)
     timeout (0.3.0)
     turbo-rails (1.1.1)
       actionpack (>= 6.0.0)
@@ -401,6 +402,8 @@ GEM
     unf_ext (0.0.8.2)
     unicode-display_width (2.2.0)
     unicode_utils (1.4.0)
+    validates_timeliness (5.0.0)
+      timeliness (>= 0.3.10, < 1)
     warden (1.2.9)
       rack (>= 2.0.9)
     web-console (4.2.0)
@@ -458,6 +461,7 @@ DEPENDENCIES
   thor
   turbo-rails
   tzinfo-data
+  validates_timeliness
   web-console
   webdrivers
 
