@@ -14,6 +14,8 @@ Rails.application.routes.draw do
       resources :contract_details, only: [:create, :update]
     end
 
+    resources :companies 
+
    
   end
 end
