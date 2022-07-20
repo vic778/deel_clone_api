@@ -10,7 +10,7 @@ class User < ApplicationRecord
   after_initialize :set_default_role
   belongs_to :role
   has_one :profile
-  has_many :contracts, through: :profile 
+  has_many :contracts, through: :profile
 
   def requires_confirmation?
     !confirmed?
