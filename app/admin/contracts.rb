@@ -4,7 +4,7 @@ ActiveAdmin.register Contract do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :user_id, :name
+  permit_params :user_id, :name, :company_id, :contract_detail_id
   #
   # or
   #
