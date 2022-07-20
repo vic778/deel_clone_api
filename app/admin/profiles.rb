@@ -4,7 +4,7 @@ ActiveAdmin.register Profile do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :first_name, :last_name, :date_of_birth, :country, :avatar_url, :video_url, :user_id
+  permit_params :first_name, :last_name, :date_of_birth, :country, :avatar_url, :video_url, :user_id, :company_id
   #
   # or
   #
