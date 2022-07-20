@@ -1,5 +1,6 @@
 class Contract < ApplicationRecord
   belongs_to :user
+  belongs_to :company
   has_one :contract_detail
 
   enum name: {
