@@ -10,6 +10,12 @@ Rails.application.routes.draw do
     get 'user/auto_login', to: 'users#auto_login'
     get 'users', to: 'users#index'
 
+    resources :contracts do
+      resources :contract_details, only: [:create, :update]
+    end
+
+    resources :companies 
+
    
   end
 end
