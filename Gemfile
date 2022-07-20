@@ -58,6 +58,7 @@ gem 'cloudinary'
 gem 'country_select', require: 'country_select_without_sort_alphabetical'
 gem 'dotenv-rails', '~> 2.7', '>= 2.7.6'
 gem "image_processing", "~> 1.2"
+gem 'validates_timeliness'
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
