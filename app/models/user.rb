@@ -11,6 +11,7 @@ class User < ApplicationRecord
   belongs_to :role
   has_one :profile
   has_many :contracts
+  has_many :payments
 
   def requires_confirmation?
     !confirmed?
