@@ -14,7 +14,11 @@ class ContractsController < PermissionsController
   end
 
   def create
-    @contract = Contract.create(contract_params.merge(user: current_user))
+    @ad = current_user
+    @user = User.find(params[:user_id])
+    @company = Company.find_by_id(params[:company_id])
+    @contract = @company.contracts.create(contract_params.merge(user_id: @ad.id))
+    # @contract = Contract.create(contract_params.merge(user: current_user))
     if @contract.save
       render json: { success: true, message: "Contract created successfully", contract: @contract }
     else

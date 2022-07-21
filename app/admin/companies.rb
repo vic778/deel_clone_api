@@ -4,7 +4,7 @@ ActiveAdmin.register Company do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  permit_params :legal_name, :company_type, :phone_number, :registration_number, :vat_id, :profile_id
+  permit_params :legal_name, :company_type, :phone_number, :registration_number, :vat_id, :profile_id, :contract_id
   #
   # or
   #
