@@ -5,7 +5,7 @@ class Payment < ApplicationRecord
   enum status: {
     pending: 0,
     published: 1,
-    closed: 2,
+    closed: 2
   }
 
   validates :amount, presence: true
