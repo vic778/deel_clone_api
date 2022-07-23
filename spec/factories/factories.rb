@@ -27,11 +27,6 @@ FactoryBot.define do
   factory :profile do
     first_name { Faker::Name.first_name }
     last_name { Faker::Name.last_name }
-    phone { Faker::PhoneNumber.phone_number }
-    address { Faker::Address.street_address }
-    city { Faker::Address.city }
-    state { Faker::Address.state }
-    zip { Faker::Address.zip_code }
     country { Faker::Address.country }
 
     association :user, factory: :user
@@ -48,7 +43,7 @@ FactoryBot.define do
   end
 
   factory :contract do
-    name { Faker::Name.name }
+    name { Contract.names.keys.sample }
     association :company, factory: :company
     association :user, factory: :usert
   end

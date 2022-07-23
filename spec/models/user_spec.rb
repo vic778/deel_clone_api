@@ -1,13 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  it {should belong_to(:role) }
-  it {should have_one(:profile) }
-  it{ is_expected.to validate_presence_of(:username) }
-  it{ is_expected.to validate_presence_of(:email) }
-  it{ is_expected.to validate_presence_of(:password) }
-  it{ is_expected.to validate_presence_of(:password_confirmation) }
- 
+  it { should belong_to(:role) }
+  it { should have_one(:profile) }
+  it { is_expected.to validate_presence_of(:username) }
+  it { is_expected.to validate_presence_of(:email) }
+  it { is_expected.to validate_presence_of(:password) }
+  it { is_expected.to validate_presence_of(:password_confirmation) }
 
   describe 'validations' do
     it { should validate_uniqueness_of(:username).case_insensitive }
@@ -65,5 +64,4 @@ RSpec.describe User, type: :model do
       expect(user).to_not be_valid
     end
   end
-
 end
