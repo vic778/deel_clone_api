@@ -55,7 +55,7 @@ gem "bootsnap", require: false
 gem "sassc-rails"
 
 gem 'cloudinary'
-gem 'country_select', require: 'country_select_without_sort_alphabetical'
+# gem 'country_select', require: 'country_select_without_sort_alphabetical'
 gem 'dotenv-rails', '~> 2.7', '>= 2.7.6'
 gem "image_processing", "~> 1.2"
 gem 'validates_timeliness'
@@ -90,3 +90,5 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
 end
+
+gem "byebug", "~> 11.1", groups: %i[development test]
