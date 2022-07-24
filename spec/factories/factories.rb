@@ -45,7 +45,7 @@ FactoryBot.define do
   factory :contract do
     name { Contract.names.keys.sample }
     association :company, factory: :company
-    association :user, factory: :usert
+    association :user, factory: :user
   end
 
   factory :payment do
@@ -59,7 +59,7 @@ FactoryBot.define do
   factory :contract_detail do
     contract_name { Faker::Name.name }
     contractor_residence { Faker::Address.street_address }
-    job_title { Faker::Name.title }
+    job_title { Faker::Name.name }
     description { Faker::Lorem.paragraph }
     start_date { Faker::Date.forward(days: 30) }
     over_date { Faker::Date.forward(days: 30) }
