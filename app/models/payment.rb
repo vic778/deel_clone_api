@@ -9,4 +9,5 @@ class Payment < ApplicationRecord
   }
 
   validates :amount, presence: true
+  validates :status, presence: true
 end

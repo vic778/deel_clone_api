@@ -9,4 +9,6 @@ class Contract < ApplicationRecord
     payAsYouGo: 1,
     milestone: 2
   }
+
+  validates :name, presence: true, uniqueness: true
 end
