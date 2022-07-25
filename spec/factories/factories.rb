@@ -8,7 +8,7 @@ FactoryBot.define do
   end
 
   factory :user do
-    username { Faker::Internet.user_name }
+    username { Faker::Name.name }
     email { Faker::Internet.email }
     password { 'password' }
     password_confirmation { 'password' }
