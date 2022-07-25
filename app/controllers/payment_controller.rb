@@ -16,7 +16,6 @@ class PaymentController < PermissionsController
       @payment.user = @user
       @payment.save
       render json: @payment, status: :created
-    # update contract
     # @contract.update(payment_status: true)
 
     else
