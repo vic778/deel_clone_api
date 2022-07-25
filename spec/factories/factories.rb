@@ -16,7 +16,7 @@ FactoryBot.define do
     association :role, factory: :role, name: 'user'
 
     trait :admin do
-      association :role, factory: :role, name: 'cpmpany'
+      association :role, factory: :role, name: 'company'
     end
 
     trait :teacher do

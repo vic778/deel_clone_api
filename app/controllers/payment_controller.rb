@@ -7,7 +7,7 @@ class PaymentController < PermissionsController
     @user = User.find(params[:user_id])
     #  byebug
     @contract = Contract.where(id: params[:contract_id], user_id: params[:user_id])
-    puts @contract
+    # puts "comment params: #{@contract}"
     # check is the user in the params is in the contract
     if @contract.exists?
       # create payment
@@ -16,7 +16,6 @@ class PaymentController < PermissionsController
       @payment.user = @user
       @payment.save
       render json: @payment, status: :created
-    # update contract
     # @contract.update(payment_status: true)
 
     else
