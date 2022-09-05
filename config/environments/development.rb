@@ -1,8 +1,6 @@
 require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
-  # Settings specified here will take precedence over those in config/application.rb.
-
   # In the development environment your application's code is reloaded any time
   # it changes. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.
@@ -34,27 +32,24 @@ Rails.application.configure do
   end
 
   # Store uploaded files on the local file system (see config/storage.yml for options).
-  # config.active_storage.service = :local
-
-  # Store uploaded files on the local file system (see config/storage.yml for options).
-  config.active_storage.service = :cloudinary
+  config.active_storage.service = :local
 
   # Don't care if the mailer can't send.
   config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.perform_deliveries = true
-  config.action_mailer.default_url_options = { :host => "localhost", :port => 3000 }
+  # config.action_mailer.delivery_method = :smtp
+  # config.action_mailer.perform_deliveries = true
+  # config.action_mailer.default_url_options = { :host => "localhost", :port => 3000 }
 
-  config.action_mailer.smtp_settings = {
-    :address => "smtp.zoho.eu",
-    :port => 465,
-    :user_name => ENV["VIC_EMAIL_ADDRESS"],
-    :password => ENV["VIC_EMAIL_PASSWORD"],
-    :authentication => :login,
-    :tls => true,
-    enable_starttls_auto: true
-  }
- 
+  # config.action_mailer.smtp_settings = {
+  #   :address => "smtp.zoho.eu",
+  #   :port => 465,
+  #   :user_name => ENV["VIC_EMAIL_ADDRESS"],
+  #   :password => ENV["VIC_EMAIL_PASSWORD"],
+  #   :authentication => :login,
+  #   :tls => true,
+  #   enable_starttls_auto: true
+  # }
+
   config.action_mailer.perform_caching = false
 
   # Print deprecation notices to the Rails logger.
@@ -83,11 +78,9 @@ Rails.application.configure do
 
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
+  config.action_mailer.delivery_method = :letter_opener
+  config.action_mailer.perform_deliveries = true
 
-
-  # Use an evented file watcher to asynchronously detect changes in source code,
-  # routes, locales, etc. This feature depends on the listen gem.
-  # config.file_watcher = ActiveSupport::EventedFileUpdateChecker
-
+  # Devise :confirmable
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 end
