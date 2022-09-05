@@ -71,6 +71,7 @@ group :development, :test do
   gem "debug", platforms: %i[mri mingw x64_mingw]
   gem 'factory_bot_rails'
   gem 'faker'
+  gem 'letter_opener', '~> 1.8', '>= 1.8.1'
   gem 'rspec-rails'
   gem 'rubocop'
   gem 'shoulda-matchers'
