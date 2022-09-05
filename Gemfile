@@ -36,6 +36,9 @@ gem 'omniauth-google-oauth2'
 gem "pundit"
 gem 'rack-cors'
 gem 'thor'
+gem 'rswag'
+gem 'rswag-api'
+gem 'rswag-ui'
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 
