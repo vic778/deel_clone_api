@@ -45,6 +45,85 @@ paths:
               - registration_number
               - phone_number
               - vat_id
+    get:
+      summary: List all companies for current user
+      tags:
+      - Companies
+      security:
+      - bearer_auth: {}
+      responses:
+        '200':
+          description: companies found
+  "/api/companies/{id}":
+    put:
+      summary: Update a company
+      tags:
+      - Companies
+      security:
+      - bearer_auth: {}
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: company updated
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                legal_name:
+                  type: string
+                company_type:
+                  type: string
+                registration_number:
+                  type: integer
+                phone_number:
+                  type: string
+                vat_id:
+                  type: string
+              required:
+              - legal_name
+              - company_type
+              - registration_number
+              - phone_number
+              - vat_id
+    delete:
+      summary: Delete a company
+      tags:
+      - Companies
+      security:
+      - bearer_auth: {}
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: company deleted
+    get:
+      summary: Show a company
+      tags:
+      - Companies
+      security:
+      - bearer_auth: {}
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: company found
   "/api/users":
     post:
       summary: Creates a user
