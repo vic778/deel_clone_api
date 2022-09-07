@@ -124,6 +124,69 @@ paths:
       responses:
         '200':
           description: company found
+  "/api/contracts":
+    post:
+      summary: Create a contract
+      tags:
+      - Contracts
+      security:
+      - bearer_auth: {}
+      parameters: []
+      responses:
+        '201':
+          description: contract created
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                user_id:
+                  type: integer
+                company_id:
+                  type: integer
+              required:
+              - name
+              - user_id
+              - company_id
+  "/api/contracts/{id}":
+    put:
+      summary: Update a contract
+      tags:
+      - Contracts
+      security:
+      - bearer_auth: {}
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: contract updated
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                user_id:
+                  type: integer
+                company_id:
+                  type: integer
+              required:
+              - name
+              - user_id
+              - company_id
   "/api/users":
     post:
       summary: Creates a user
