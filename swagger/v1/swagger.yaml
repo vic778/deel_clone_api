@@ -124,6 +124,43 @@ paths:
       responses:
         '200':
           description: company found
+  "/api/contracts/1/contract_details":
+    post:
+      summary: Create a contract detail
+      tags:
+      - Contract Details
+      security:
+      - bearer_auth: {}
+      parameters: []
+      responses:
+        '201':
+          description: contract detail created
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                contract_name:
+                  type: string
+                contractor_residence:
+                  type: string
+                job_title:
+                  type: string
+                description:
+                  type: string
+                start_date:
+                  type: string
+                over_date:
+                  type: string
+              required:
+              - contract_id
+              - description
+              - quantity
+              - unit_price
+              - total_price
   "/api/contracts":
     post:
       summary: Create a contract
