@@ -261,6 +261,36 @@ paths:
               - name
               - user_id
               - company_id
+  "/api/dashboard":
+    get:
+      summary: Get dashboard data
+      tags:
+      - Dashboard
+      security:
+      - bearer_auth: {}
+      responses:
+        '200':
+          description: dashboard data
+  "/api/dashboard/contracts":
+    get:
+      summary: Get the details of your contract
+      tags:
+      - Dashboard
+      security:
+      - bearer_auth: {}
+      responses:
+        '200':
+          description: dashboard contracts data
+  "/api/dashboard/upcoming":
+    get:
+      summary: See your upcoming payment
+      tags:
+      - Dashboard
+      security:
+      - bearer_auth: {}
+      responses:
+        '200':
+          description: dashboard upcoming data
   "/api/users":
     post:
       summary: Creates a user
@@ -326,7 +356,7 @@ paths:
               required:
               - user
 servers:
-- url: http://{defaultHost}
+- url: https://{defaultHost}
   variables:
     defaultHost:
-      default: localhost:3000
+      default: deel1.herokuapp.com
