@@ -35,6 +35,9 @@ gem 'jwt'
 gem 'omniauth-google-oauth2'
 gem "pundit"
 gem 'rack-cors'
+gem 'rswag'
+gem 'rswag-api'
+gem 'rswag-ui'
 gem 'thor'
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
@@ -68,6 +71,7 @@ group :development, :test do
   gem "debug", platforms: %i[mri mingw x64_mingw]
   gem 'factory_bot_rails'
   gem 'faker'
+  gem 'letter_opener', '~> 1.8', '>= 1.8.1'
   gem 'rspec-rails'
   gem 'rubocop'
   gem 'shoulda-matchers'

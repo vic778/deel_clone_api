@@ -1,0 +1,332 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+components:
+  securitySchemes:
+    bearer_auth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+paths:
+  "/api/companies":
+    post:
+      summary: Create a company
+      tags:
+      - Companies
+      security:
+      - bearer_auth: {}
+      parameters: []
+      responses:
+        '201':
+          description: company created
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                legal_name:
+                  type: string
+                company_type:
+                  type: string
+                registration_number:
+                  type: integer
+                phone_number:
+                  type: string
+                vat_id:
+                  type: string
+              required:
+              - legal_name
+              - company_type
+              - registration_number
+              - phone_number
+              - vat_id
+    get:
+      summary: List all companies for current user
+      tags:
+      - Companies
+      security:
+      - bearer_auth: {}
+      responses:
+        '200':
+          description: companies found
+  "/api/companies/{id}":
+    put:
+      summary: Update a company
+      tags:
+      - Companies
+      security:
+      - bearer_auth: {}
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: company updated
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                legal_name:
+                  type: string
+                company_type:
+                  type: string
+                registration_number:
+                  type: integer
+                phone_number:
+                  type: string
+                vat_id:
+                  type: string
+              required:
+              - legal_name
+              - company_type
+              - registration_number
+              - phone_number
+              - vat_id
+    delete:
+      summary: Delete a company
+      tags:
+      - Companies
+      security:
+      - bearer_auth: {}
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: company deleted
+    get:
+      summary: Show a company
+      tags:
+      - Companies
+      security:
+      - bearer_auth: {}
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: company found
+  "/api/contracts/1/contract_details":
+    post:
+      summary: Create a contract detail
+      tags:
+      - Contract Details
+      security:
+      - bearer_auth: {}
+      parameters: []
+      responses:
+        '201':
+          description: contract detail created
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                contract_name:
+                  type: string
+                contractor_residence:
+                  type: string
+                job_title:
+                  type: string
+                description:
+                  type: string
+                start_date:
+                  type: string
+                over_date:
+                  type: string
+              required:
+              - contract_id
+              - description
+              - quantity
+              - unit_price
+              - total_price
+  "/api/contracts/1/contract_details/1":
+    put:
+      summary: Update a contract detail
+      tags:
+      - Contract Details
+      security:
+      - bearer_auth: {}
+      parameters: []
+      responses:
+        '200':
+          description: contract detail updated
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                contract_name:
+                  type: string
+                contractor_residence:
+                  type: string
+                job_title:
+                  type: string
+                description:
+                  type: string
+                start_date:
+                  type: string
+                over_date:
+                  type: string
+              required:
+              - contract_id
+              - description
+              - quantity
+              - unit_price
+              - total_price
+  "/api/contracts":
+    post:
+      summary: Create a contract
+      tags:
+      - Contracts
+      security:
+      - bearer_auth: {}
+      parameters: []
+      responses:
+        '201':
+          description: contract created
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                user_id:
+                  type: integer
+                company_id:
+                  type: integer
+              required:
+              - name
+              - user_id
+              - company_id
+  "/api/contracts/{id}":
+    put:
+      summary: Update a contract
+      tags:
+      - Contracts
+      security:
+      - bearer_auth: {}
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: contract updated
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                user_id:
+                  type: integer
+                company_id:
+                  type: integer
+              required:
+              - name
+              - user_id
+              - company_id
+  "/api/users":
+    post:
+      summary: Creates a user
+      tags:
+      - Users
+      parameters: []
+      responses:
+        '201':
+          description: user created
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: object
+                  properties:
+                    username:
+                      type: string
+                    email:
+                      type: string
+                    password:
+                      type: string
+                    password_confirmation:
+                      type: string
+                  required:
+                  - username
+                  - email
+                  - password
+                  - password_confirmation
+              required:
+              - user
+  "/api/users/login":
+    post:
+      summary: Logs in a user
+      tags:
+      - Users
+      parameters: []
+      responses:
+        '200':
+          description: user logged in
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: object
+                  properties:
+                    email:
+                      type: string
+                    password:
+                      type: string
+                  required:
+                  - email
+                  - password
+              required:
+              - user
+servers:
+- url: http://{defaultHost}
+  variables:
+    defaultHost:
+      default: localhost:3000
