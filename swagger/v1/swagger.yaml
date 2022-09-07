@@ -3,14 +3,20 @@ openapi: 3.0.1
 info:
   title: API V1
   version: v1
+components:
+  securitySchemes:
+    bearer_auth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
 paths:
   "/api/companies":
     post:
-      summary: Creates a company
+      summary: Create a company
       tags:
       - Companies
       security:
-      - Bearer: []
+      - bearer_auth: {}
       parameters: []
       responses:
         '201':
@@ -23,19 +29,22 @@ paths:
             schema:
               type: object
               properties:
-                company:
-                  type: object
-                  properties:
-                    legal_name:
-                      type: string
-                    company_type:
-                      type: string
-                    phone_number:
-                      type: string
-                    registration_number:
-                      type: string
-                    vat_id:
-                      type: string
+                legal_name:
+                  type: string
+                company_type:
+                  type: string
+                registration_number:
+                  type: integer
+                phone_number:
+                  type: string
+                vat_id:
+                  type: string
+              required:
+              - legal_name
+              - company_type
+              - registration_number
+              - phone_number
+              - vat_id
   "/api/users":
     post:
       summary: Creates a user
