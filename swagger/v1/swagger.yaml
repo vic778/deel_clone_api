@@ -4,6 +4,38 @@ info:
   title: API V1
   version: v1
 paths:
+  "/api/companies":
+    post:
+      summary: Creates a company
+      tags:
+      - Companies
+      security:
+      - Bearer: []
+      parameters: []
+      responses:
+        '201':
+          description: company created
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                company:
+                  type: object
+                  properties:
+                    legal_name:
+                      type: string
+                    company_type:
+                      type: string
+                    phone_number:
+                      type: string
+                    registration_number:
+                      type: string
+                    vat_id:
+                      type: string
   "/api/users":
     post:
       summary: Creates a user
