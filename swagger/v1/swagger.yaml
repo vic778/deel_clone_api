@@ -161,6 +161,43 @@ paths:
               - quantity
               - unit_price
               - total_price
+  "/api/contracts/1/contract_details/1":
+    put:
+      summary: Update a contract detail
+      tags:
+      - Contract Details
+      security:
+      - bearer_auth: {}
+      parameters: []
+      responses:
+        '200':
+          description: contract detail updated
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                contract_name:
+                  type: string
+                contractor_residence:
+                  type: string
+                job_title:
+                  type: string
+                description:
+                  type: string
+                start_date:
+                  type: string
+                over_date:
+                  type: string
+              required:
+              - contract_id
+              - description
+              - quantity
+              - unit_price
+              - total_price
   "/api/contracts":
     post:
       summary: Create a contract
