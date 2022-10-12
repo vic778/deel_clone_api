@@ -1,6 +1,8 @@
+require 'date'
+
 class ContractDetail < ApplicationRecord
   belongs_to :contract
-  before_save :validate_start_date
+  validate :validate_start_date
 
   validates :contract_name, presence: true
   validates :contractor_residence, presence: true
@@ -10,7 +12,7 @@ class ContractDetail < ApplicationRecord
 
   # check if start_date is not behind today's data
   def validate_start_date
-    @date = DateTime.now
+    @date = Date.current
     errors.add(:start_date, "can't be in the past") if start_date.present? && start_date < @date
   end
 end
