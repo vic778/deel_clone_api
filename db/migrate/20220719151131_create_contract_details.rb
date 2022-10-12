@@ -5,8 +5,8 @@ class CreateContractDetails < ActiveRecord::Migration[7.0]
       t.string :contractor_residence
       t.string :job_title
       t.text :description
-      t.string :start_date
-      t.string :over_date
+      t.date :start_date
+      t.date :over_date
       t.references :contract, null: false, foreign_key: true
 
       t.timestamps

@@ -66,8 +66,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_23_054307) do
     t.string "contractor_residence"
     t.string "job_title"
     t.text "description"
-    t.string "start_date"
-    t.string "over_date"
+    t.date "start_date"
+    t.date "over_date"
     t.bigint "contract_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
