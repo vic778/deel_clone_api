@@ -61,6 +61,6 @@ workflows: # Ref: https://medium.com/@allanmongej/setting-up-ci-cd-to-a-rails-6-
   build_and_test:
     jobs:
       - build
-      - test:
-          requires:
-            - build
+      # - test:
+      #     requires:
+      #       - build
