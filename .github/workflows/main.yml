@@ -1,136 +1,66 @@
-# build & test & quality
+version: 2.1
 
-name: build & test & quality
+orbs:
+  ruby: circleci/ruby@1.1.0
+  node: circleci/node@2
+  heroku: circleci/heroku@1.0.1 # Use the Heroku orb in your config
 
-# Triggers the workflow on push or pull request events
-on: [push]
-
-concurrency: 
-  group: ${{ github.ref }}
-  cancel-in-progress: true
-
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  minitest:
-    env:
-      RAILS_ENV: test
-      POSTGRES_USER: postgres
-      POSTGRES_DB: deel/test
-      POSTGRES_PASSWORD: "password"
-
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ubuntu-latest]
-        ruby-version: [3.0.3]
-
-    # The type of runner that the job will run on
-    runs-on: ${{ matrix.os }}
-
-    services:
-      redis:
-        image: redis
-        options: >-
-          --health-cmd "redis-cli ping"
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-        ports:
-          - 6379:6379
-
-      # Label used to access the service container
-      postgres:
-        # Docker Hub image
-        image: postgres:14
-        # Provide the password for postgres
-        env:
+  build:
+    docker:
+      - image: cimg/ruby:3.0.3
+    steps:
+      - checkout
+      - ruby/install-deps
+      # Store bundle cache
+      # - node/install-packages:
+      #    pkg-manager: yarn
+      #    cache-key: "yarn.lock"
+  test:
+    parallelism: 3
+    docker:
+      - image: cimg/ruby:3.0.3
+      - image: cimg/postgres:14.2
+        environment:
           POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-        # Set health checks to wait until postgres has started
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-        ports:
-          # Maps tcp port 5432 on service container to the host
-          - 5432:5432
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
-      - run: echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
-        with:
-          persist-credentials: false
-
-      - name: Set up Ruby ${{ matrix.ruby-version }}
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: ${{ matrix.ruby-version }}
-          bundler-cache: false
-
-      - name: Install ruby dependencies
-        run: bundle install
-
-      - name: Create test database
-        env:
-          RAILS_ENV: test
-        run: |
-          bundle exec rails db:create
-          bundle exec rails db:schema:load
-      - name: Running rails tests
-        run: bundle exec rails test
-
-  rubocop:
-    strategy:
-      matrix:
-        os: [ubuntu-latest]
-        ruby-version: [3.0.3]
-
-    runs-on: ${{ matrix.os }}
-
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          persist-credentials: false
-
-      - name: Set up Ruby ${{ matrix.ruby-version }}
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: ${{ matrix.ruby-version }}
-          bundler-cache: false
-
-      - name: Install ruby dependencies
-        run: bundle install
-
-      - name: Rubocop
-        run: bundle exec rubocop --config .rubocop.yml --parallel
-
-  zeitwerk:
-    env:
+          POSTGRES_DB: deel/test
+          POSTGRES_PASSWORD: "password"
+    environment:
+      BUNDLE_JOBS: "3"
+      BUNDLE_RETRY: "3"
+      PGHOST: 127.0.0.1
+      PGUSER: postgres
+      PGPASSWORD: "password"
       RAILS_ENV: test
-
-    strategy:
-      matrix:
-        os: [ ubuntu-latest ]
-        ruby-version: [3.0.3]
-
-    runs-on: ${{ matrix.os }}
-
     steps:
-      - uses: actions/checkout@v2
-        with:
-          persist-credentials: false
+      - checkout
+      - ruby/install-deps
+      # - node/install-packages:
+      #    pkg-manager: yarn
+      #    cache-key: "yarn.lock"
+      - run:
+          name: Wait for DB
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+      - run:
+          name: Database Setup
+          command: |
+            bundle exec rake db:create
+            bundle exec rake db:test:load
+      - run:
+          name: Compile assets
+          command: bundle exec rake assets:precompile
+      - run:
+          name: Parallel RSpec
+          command: bin/rake spec
+      # - run:
+      #     name: Run standardrb check
+      #     command: bundle exec standardrb --format progress
 
-      - name: Set up Ruby ${{ matrix.ruby-version }}
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: ${{ matrix.ruby-version }}
-          bundler-cache: false
-
-      - name: Install ruby dependencies
-        run: bundle install
-
-      - name: Zeitwerk Check
-        run: bundle exec rails zeitwerk:check
+workflows: # Ref: https://medium.com/@allanmongej/setting-up-ci-cd-to-a-rails-6-api-with-circleci-and-heroku-c00064f31d57
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
