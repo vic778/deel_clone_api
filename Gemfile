@@ -31,6 +31,7 @@ gem 'activeadmin'
 gem 'active_model_serializers', '~> 0.10.0'
 gem 'carrierwave'
 gem 'devise'
+gem 'friendly_id', '~> 5.4', '>= 5.4.2'
 gem 'jwt'
 gem 'omniauth-google-oauth2'
 gem "pundit"

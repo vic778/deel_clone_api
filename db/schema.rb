@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_23_054307) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_12_185021) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -66,8 +66,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_23_054307) do
     t.string "contractor_residence"
     t.string "job_title"
     t.text "description"
-    t.string "start_date"
-    t.string "over_date"
+    t.date "start_date"
+    t.date "over_date"
     t.bigint "contract_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -80,7 +80,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_23_054307) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "company_id"
+    t.integer "employee_id"
     t.index ["company_id"], name: "index_contracts_on_company_id"
+    t.index ["employee_id"], name: "index_contracts_on_employee_id"
     t.index ["name"], name: "index_contracts_on_name"
     t.index ["user_id"], name: "index_contracts_on_user_id"
   end
@@ -146,6 +148,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_23_054307) do
   add_foreign_key "contract_details", "contracts"
   add_foreign_key "contracts", "companies"
   add_foreign_key "contracts", "users"
+  add_foreign_key "contracts", "users", column: "employee_id"
   add_foreign_key "payments", "contracts"
   add_foreign_key "payments", "users"
   add_foreign_key "profiles", "users"
