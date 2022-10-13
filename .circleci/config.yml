@@ -16,6 +16,20 @@ jobs:
       # - node/install-packages:
       #    pkg-manager: yarn
       #    cache-key: "yarn.lock"
+   rubocop:
+    name: Rubocop
+    runs-on: ubuntu-22.00
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-ruby@v1
+        with:
+          ruby-version: 3.0.x
+      - name: Setup Rubocop
+        run: |
+          gem install --no-document rubocop -v '>= 1.0, < 2.0' # https://docs.rubocop.org/en/stable/installation/
+          [ -f .rubocop.yml ] || wget https://raw.githubusercontent.com/microverseinc/linters-config/master/ror/.rubocop.yml
+      - name: Rubocop Report
+        run: rubocop --color
   test:
     parallelism: 3
     docker:
@@ -49,9 +63,9 @@ jobs:
       - run:
           name: Compile assets
           command: bundle exec rake assets:precompile
-      - run:
-          name: Parallel RSpec
-          command: bin/rake spec
+      # - run:
+      #     name: Parallel RSpec
+      #     command: bin/rake spec
       # - run:
       #     name: Run standardrb check
       #     command: bundle exec standardrb --format progress
@@ -61,6 +75,8 @@ workflows: # Ref: https://medium.com/@allanmongej/setting-up-ci-cd-to-a-rails-6-
   build_and_test:
     jobs:
       - build
+      - rubocop
       - test:
           requires:
             - build
+            - rubocop
