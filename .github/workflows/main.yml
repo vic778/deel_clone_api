@@ -13,9 +13,10 @@ concurrency:
 jobs:
   minitest:
     env:
-      # POSTGRES_USER: postgres
+      RAILS_ENV: test
+      POSTGRES_USER: postgres
       POSTGRES_DB: deel/test
-      # POSTGRES_PASSWORD: "password"
+      POSTGRES_PASSWORD: "password"
 
     strategy:
       fail-fast: false
