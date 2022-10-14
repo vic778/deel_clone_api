@@ -6,7 +6,7 @@ RSpec.describe 'api/dashboard', type: :request do
       tags "Dashboard"
       consumes "application/json"
       security [bearer_auth: {}]
-    
+
       response '201', 'successfully authenticated' do
         token = JWT.encode({ id: 1 }, 'vicSecret', 'HS256')
         let(:Authorization) { "Bearer #{token}" }
@@ -22,7 +22,6 @@ RSpec.describe 'api/dashboard', type: :request do
       response "200", "dashboard contracts data" do
         let(:user) { create(:user, :admin) }
         let(:Authorization) { "Bearer #{@token}" }
-       
       end
     end
   end
