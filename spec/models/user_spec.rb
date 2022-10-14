@@ -9,7 +9,7 @@ RSpec.describe User, type: :model do
   it { is_expected.to validate_presence_of(:password_confirmation) }
 
   describe 'validations' do
-    it { should validate_uniqueness_of(:username).case_insensitive }
+    it { should validate_uniqueness_of(:username) }
     it { should validate_uniqueness_of(:email).case_insensitive }
     it { should validate_confirmation_of(:password) }
     it { should validate_length_of(:password).is_at_least(6) }
@@ -54,13 +54,6 @@ RSpec.describe User, type: :model do
   describe 'It is invalid without a role' do
     it 'should be invalid' do
       user = build(:user, role: nil)
-      expect(user).to_not be_valid
-    end
-  end
-
-  describe 'It is invalid without a profile' do
-    it 'should be invalid' do
-      user = build(:user, profile: nil)
       expect(user).to_not be_valid
     end
   end

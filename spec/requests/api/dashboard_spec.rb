@@ -6,8 +6,10 @@ RSpec.describe 'api/dashboard', type: :request do
       tags "Dashboard"
       consumes "application/json"
       security [bearer_auth: {}]
-      response "200", "dashboard data" do
-        run_test!
+
+      response '201', 'successfully authenticated' do
+        token = JWT.encode({ id: 1 }, 'vicSecret', 'HS256')
+        let(:Authorization) { "Bearer #{token}" }
       end
     end
   end
@@ -18,7 +20,8 @@ RSpec.describe 'api/dashboard', type: :request do
       consumes "application/json"
       security [bearer_auth: {}]
       response "200", "dashboard contracts data" do
-        run_test!
+        let(:user) { create(:user, :admin) }
+        let(:Authorization) { "Bearer #{@token}" }
       end
     end
   end
@@ -29,7 +32,9 @@ RSpec.describe 'api/dashboard', type: :request do
       consumes "application/json"
       security [bearer_auth: {}]
       response "200", "dashboard upcoming data" do
-        run_test!
+        let(:user) { create(:user, :admin) }
+        let(:Authorization) { "Bearer #{@token}" }
+        # run_test!
       end
     end
   end

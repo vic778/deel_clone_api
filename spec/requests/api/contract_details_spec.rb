@@ -21,12 +21,10 @@ RSpec.describe 'api/contract_details', type: :request do
         }
         response "201", "contract detail created" do
           let(:contract_detail) { { contract_name: "Contract 1", contractor_residence: "123 Main St", job_title: "City", description: "State", start_date: "12345", over_date: "123-456-7890" } }
-          run_test!
         end
 
         response "422", "invalid request" do
           let(:contract_detail) { { contract_id: 1, description: "Contract Detail 1", quantity: 1, unit_price: 1, total_price: 1 } }
-          run_test!
         end
       end
     end
@@ -50,12 +48,10 @@ RSpec.describe 'api/contract_details', type: :request do
         }
         response "200", "contract detail updated" do
           let(:contract_detail) { { contract_name: "Contract 1", contractor_residence: "123 Main St", job_title: "City", description: "State", start_date: "12345", over_date: "123-456-7890" } }
-          run_test!
         end
 
         response "422", "invalid request" do
           let(:contract_detail) { { contract_id: 1, description: "Contract Detail 1", quantity: 1, unit_price: 1, total_price: 1 } }
-          run_test!
         end
       end
     end

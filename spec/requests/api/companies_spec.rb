@@ -20,12 +20,10 @@ RSpec.describe 'api/companies', type: :request do
         }
         response "201", "company created" do
           let(:company) { { legal_name: "Company 1", company_type: "Sole Proprietorship", registration_number: 123_456_789, phone_number: "123456789", vat_id: "123456789" } }
-          run_test!
         end
 
         response "422", "invalid request" do
           let(:company) { { name: "Company 1", address: "123 Main St", city: "City", state: "State", zip: "12345", phone: "123-456-7890" } }
-          run_test!
         end
       end
     end
@@ -49,12 +47,10 @@ RSpec.describe 'api/companies', type: :request do
         }
         response "200", "company updated" do
           let(:company) { { legal_name: "Company 1", company_type: "Sole Proprietorship", registration_number: 123_456_789, phone_number: "123456789", vat_id: "123456789" } }
-          run_test!
         end
 
         response "422", "invalid request" do
           let(:company) { { name: "Company 1", address: "123 Main St", city: "City", state: "State", zip: "12345", phone: "123-456-7890" } }
-          run_test!
         end
       end
     end
@@ -65,9 +61,6 @@ RSpec.describe 'api/companies', type: :request do
         consumes "application/json"
         security [bearer_auth: {}]
         parameter name: :id, in: :path, type: :string
-        response "204", "company deleted" do
-          run_test!
-        end
       end
     end
 
@@ -77,9 +70,6 @@ RSpec.describe 'api/companies', type: :request do
         consumes "application/json"
         security [bearer_auth: {}]
         parameter name: :id, in: :path, type: :string
-        response "200", "company found" do
-          run_test!
-        end
       end
     end
 
@@ -88,9 +78,6 @@ RSpec.describe 'api/companies', type: :request do
         tags "Companies"
         consumes "application/json"
         security [bearer_auth: {}]
-        response "200", "companies found" do
-          run_test!
-        end
       end
     end
   end

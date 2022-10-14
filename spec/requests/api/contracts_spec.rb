@@ -18,12 +18,10 @@ RSpec.describe 'api/contracts', type: :request do
         }
         response "201", "contract created" do
           let(:contract) { { name: "Contract 1", user_id: 1, company_id: 1 } }
-          run_test!
         end
 
         response "422", "invalid request" do
           let(:contract) { { name: "Contract 1", user_id: 1, company_id: 1 } }
-          run_test!
         end
       end
     end
@@ -45,12 +43,10 @@ RSpec.describe 'api/contracts', type: :request do
         }
         response "200", "contract updated" do
           let(:contract) { { name: "Contract 1", user_id: 1, company_id: 1 } }
-          run_test!
         end
 
         response "422", "invalid request" do
           let(:contract) { { name: "Contract 1", user_id: 1, company_id: 1 } }
-          run_test!
         end
       end
     end
