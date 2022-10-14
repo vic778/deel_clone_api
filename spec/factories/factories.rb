@@ -12,7 +12,6 @@ FactoryBot.define do
     email { Faker::Internet.email }
     password { 'password' }
     password_confirmation { 'password' }
-
     association :role, factory: :role, name: 'user'
 
     trait :admin do
