@@ -57,11 +57,4 @@ RSpec.describe User, type: :model do
       expect(user).to_not be_valid
     end
   end
-
-  # describe 'It is invalid without a profile' do
-  #   it 'should be invalid' do
-  #     user = build(:user, profile: nil)
-  #     expect(user).to_not be_valid
-  #   end
-  # end
 end
